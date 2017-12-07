@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="/static/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h3>
+        机房管理
+      </h3>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'cmdb:index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">资产</li>
+        <li class="active">机房管理</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="box">
+            <div class="box-body">
+                <table id="idc-table" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>名称</th>
+                      <th>地址</th>
+                      <th>联系人</th>
+                      <th>联系电话</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in idc %}
+                      <tr>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.address }}</td>
+                        <td>{{ i.contact }}</td>
+                        <td>{{ i.contact_phone }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+  </div>
+{% endblock %}
+
+{% block custom_js %}
+<script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/dataTables.bootstrap.min.js"></script>
+<script>
+  $(function () {
+    $('#idc-table').DataTable()
+  })
+</script>
+{% endblock %}
