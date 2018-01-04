@@ -8,9 +8,6 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        资产信息
-      </h1>
       <ol class="breadcrumb">
         <li><a href="{% url 'cmdb:index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
         <li class="active">资产</li>
@@ -19,7 +16,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-        <div class="box">
+        <div class="box box-default">
             <div class="box-header">
                 <a href="{% url 'cmdb:add_asset' %}" class="btn btn-sm btn-primary">添加资产</a>
             </div>
@@ -27,21 +24,26 @@
                 <table id="asset-table" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>资产序列号</th>
-                      <th>资产类型</th>
-                      <th>IP 地址</th>
-                      <th>操作系统</th>
-                      <th>更新时间</th>
+                      <th class="text-center">资产序列号</th>
+                      <th class="text-center">资产类型</th>
+                      <th class="text-center">IP 地址</th>
+                      <th class="text-center">操作系统</th>
+                      <th class="text-center">更新时间</th>
+                      <th class="text-center">操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for asset in assets %}
-                      <tr>
+                      <tr class="text-center">
                         <td>{{ asset.sn }}</td>
                         <td>{{ asset.get_asset_type_display }}</td>
                         <td>{{ asset.ip }}</td>
                         <td>{{ asset.os }}</td>
                         <td>{{ asset.update_date }}</td>
+                        <td>
+                            <a href="{% url 'cmdb:asset-detail' asset.id %}" class="btn btn-xs btn-info">详情</a>
+                            <a href="#" class="btn btn-xs btn-danger">删除</a>
+                        </td>
                       </tr>
                     {% endfor %}
                     </tbody>
@@ -52,6 +54,7 @@
                       <th>IP 地址</th>
                       <th>操作系统</th>
                       <th>更新时间</th>
+                      <th class="text-center">操作</th>
                     </tr>
                     </tfoot>
                   </table>
@@ -69,7 +72,7 @@
 <script>
   $(function () {
     $('#asset-table').DataTable({
-    })
+    });
   })
 </script>
 {% endblock %}

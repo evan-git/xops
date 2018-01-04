@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="/static/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="{% url 'cmdb:index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="{% url 'cmdb:asset' %}">资产</a></li>
+        <li class="active">主机详情</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#host-info" data-toggle="tab">基本信息</a></li>
+              <li><a href="#host-status" data-toggle="tab">主机状态</a></li>
+              <li><a href="#host-monitor" data-toggle="tab">监控信息</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="host-info">
+                <p>{{ grains }}</p>
+              </div>
+              <div class="tab-pane" id="host-status">
+                <h3>主机状态</h3>
+              </div>
+              <div class="tab-pane" id="host-monitor">
+                <h3>主机监控</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+  </div>
+{% endblock %}

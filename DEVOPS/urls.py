@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', include('cmdb.urls')),
+    url(r'^', include('cmdb.urls')),
     url(r'^cmdb/', include('cmdb.urls', namespace='cmdb')),
 ]

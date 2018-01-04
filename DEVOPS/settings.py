@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'cmdb',
+    'ops',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,17 @@ DATABASES = {
     }
 }
 
+
+# Cache
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://192.168.243.103:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -131,4 +143,10 @@ BOOTSTRAP3 = {
     'horizontal_field_class': 'col-md-9',
     # Set placeholder attributes to label if no placeholder is provided
     'set_placeholder': True,
+}
+
+SALT_API = {
+    'url': 'https://192.168.243.103:8000',
+    'username': 'salt-api',
+    'password': '123456'
 }

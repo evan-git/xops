@@ -9,17 +9,16 @@
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        添加资产
-      </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">资产</li>
+        <li><a href="{% url 'cmdb:index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="{% url 'cmdb:asset' %}">资产</a></li>
         <li class="active">添加资产</li>
       </ol>
     </section>
     <section class="content">
-    <div class="box box-default">
+      <div class="row">
+      <div class="col-xs-12">
+      <div class="box box-default">
         <div class="box-header with-border">
           <h3 class="box-title">资产</h3>
         </div>
@@ -44,6 +43,8 @@
             </div>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </section>
     </div>

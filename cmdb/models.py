@@ -45,12 +45,20 @@ class Network(models.Model):
 class IpAddress(models.Model):
     ip_address = models.CharField('IP地址', max_length=20)
     network = models.ForeignKey(Network)
-    is_used = models.BooleanField('是否已使用', default=False)
+#    is_used = models.BooleanField('是否已使用', default=False)
     is_vip = models.BooleanField('是否是vip', default=False)
 
     class Meta:
         verbose_name = 'IP地址'
         verbose_name_plural = verbose_name
+        ordering = ['-ip_address']
+
+    def is_used(self):
+        """used"""
+        if self.asset_set.all() == 0:
+            return True
+        else:
+            return False
 
     def __unicode__(self):
         return self.ip_address

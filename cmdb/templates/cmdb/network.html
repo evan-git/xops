@@ -8,12 +8,9 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3>
-        网络划分
-      </h3>
       <ol class="breadcrumb">
         <li><a href="{% url 'cmdb:index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">资产</li>
+        <li><a href="{% url 'cmdb:asset' %}">资产</a></li>
         <li class="active">网络划分</li>
       </ol>
     </section>
@@ -25,16 +22,16 @@
                 <table id="address-table" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>用途</th>
-                      <th>网络</th>
-                      <th>掩码</th>
-                      <th>所在机房</th>
-                      <th>添加时间</th>
+                      <th class="text-center">用途</th>
+                      <th class="text-center">网络</th>
+                      <th class="text-center">掩码</th>
+                      <th class="text-center">所在机房</th>
+                      <th class="text-center">添加时间</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for network in networks %}
-                      <tr>
+                      <tr class="text-center">
                         <td>{{ network.usage }}</td>
                         <td>{{ network.subnet }}</td>
                         <td>{{ network.netmask }}</td>

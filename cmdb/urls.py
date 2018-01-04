@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^network$', views.NetworkListView.as_view(), name='network'),
     url(r'^address$', views.IpAddressListView.as_view(), name='address'),
     url(r'^asset/add$', views.AddAssetView.as_view(), name='add_asset'),
+    url(r'^asset/(?P<pk>\d+)/$', views.AssetDetailView.as_view(), name='asset-detail'),
 ]

@@ -8,12 +8,9 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3>
-        机房管理
-      </h3>
       <ol class="breadcrumb">
         <li><a href="{% url 'cmdb:index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">资产</li>
+        <li><a href="{% url 'cmdb:asset' %}">资产</a></li>
         <li class="active">机房管理</li>
       </ol>
     </section>
@@ -25,15 +22,15 @@
                 <table id="idc-table" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>名称</th>
-                      <th>地址</th>
-                      <th>联系人</th>
-                      <th>联系电话</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">地址</th>
+                      <th class="text-center">联系人</th>
+                      <th class="text-center">联系电话</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for i in idc %}
-                      <tr>
+                      <tr class="text-center">
                         <td>{{ i.name }}</td>
                         <td>{{ i.address }}</td>
                         <td>{{ i.contact }}</td>

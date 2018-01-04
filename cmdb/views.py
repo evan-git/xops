@@ -1,8 +1,11 @@
+import json
+
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 
 from cmdb import models, forms
+from cmdb.utils import get_host_grains
 
 
 class AssetListView(ListView):
@@ -35,3 +38,20 @@ class AddAssetView(CreateView):
     success_url = reverse_lazy('cmdb:asset')
     template_name = 'cmdb/add_asset.html'
 
+    def form_valid(self, form):
+        form.cleaned_data['ip'].is_used = True
+        form.cleaned_data['ip'].save()
+        return super(AddAssetView, self).form_valid(form)
+
+
+class AssetDetailView(DetailView):
+    model = models.Asset
+    template_name = 'cmdb/asset-detail.html'
+    context_object_name = 'asset'
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'grains': get_host_grains(self.object.ip)
+        }
+        kwargs.update(context)
+        return super(AssetDetailView, self).get_context_data(**kwargs)

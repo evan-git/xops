@@ -8,12 +8,9 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3>
-        地址资源
-      </h3>
       <ol class="breadcrumb">
         <li><a href="{% url 'cmdb:index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">资产</li>
+        <li><a href="{% url 'cmdb:asset' %}">资产</a></li>
         <li class="active">地址资源</li>
       </ol>
     </section>
@@ -25,28 +22,34 @@
                 <table id="address-table" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>IP 地址</th>
-                      <th>所属网络</th>
-                      <th>是否使用</th>
-                      <th>是否是VIP</th>
+                      <th class="text-center">IP 地址</th>
+                      <th class="text-center">可用</th>
+                      <th class="text-center">VIP</th>
+                      <th class="text-center">所属网络</th>
+                      <th class="text-center">操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for address in addresses %}
-                      <tr>
+                      <tr class="text-center">
                         <td>{{ address.ip_address }}</td>
+                        <td><span class="fa {% if address.is_used %}fa-close{% else %}fa-check{% endif %}"></span></td>
+                        <td><span class="fa {% if address.is_vip %}fa-check{% else %}fa-close{% endif %}"></span></td>
                         <td>{{ address.network }}</td>
-                        <td>{{ address.is_used }}</td>
-                        <td>{{ address.is_vip }}</td>
+                        <td>
+                            <a href="#" class="btn btn-xs btn-info">详情</a>
+                            <a href="#" class="btn btn-xs btn-danger">删除</a>
+                        </td>
                       </tr>
                     {% endfor %}
                     </tbody>
                     <tfoot>
                     <tr>
-                      <th>IP 地址</th>
-                      <th>所属网络</th>
-                      <th>是否使用</th>
-                      <th>是否是VIP</th>
+                      <th class="text-center">IP 地址</th>
+                      <th class="text-center">可用</th>
+                      <th class="text-center">VIP</th>
+                      <th class="text-center">所属网络</th>
+                      <th class="text-center">操作</th>
                     </tr>
                     </tfoot>
                   </table>

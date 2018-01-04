@@ -2,6 +2,8 @@
 
 import ipaddress
 
+from django.core.cache import cache
+
 
 def gen_ip_from_network(network):
     """通过给定的网络和掩码生成可用的ip地址列表.
@@ -9,6 +11,10 @@ def gen_ip_from_network(network):
     """
     network = ipaddress.ip_network(network)
     return [str(ip) for ip in network.hosts()]
+
+
+def get_host_grains(address):
+    return cache.get('grains:%s' % address)
 
 
 if __name__ == '__main__':
