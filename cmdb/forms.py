@@ -9,7 +9,7 @@ class AssetForm(ModelForm):
 
     class Meta:
         model = models.Asset
-        fields = ['sn', 'asset_type', 'ip', 'os', 'group']
+        fields = ['hostname', 'asset_type', 'ip', 'group', 'cpu_cores', 'memory']
         widgets = {
             'asset_type': Select(
                 attrs={'class': 'select2'}),
