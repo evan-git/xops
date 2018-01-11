@@ -20,6 +20,8 @@ def _update_asset(obj, v):
     :param v: single grains return value
     :return:
     """
+    print(v['ipv4'])
+
     host_type = 0 if v['virtual'] == 'physical' else 1
     obj.hostname = v['host']
     obj.asset_type = host_type
@@ -37,7 +39,9 @@ def _update_asset(obj, v):
     obj.os_arch = v['osarch']
 
     obj.ip.clear()
-    for ip in v['ipv4'].remove('127.0.0.1'):
+    for ip in v['ipv4']:
+        if ip == '127.0.0.1':
+            continue
         obj.ip.add(IpAddress.objects.get(ip_address=ip))
 
     obj.update_date = datetime.now()
@@ -58,7 +62,10 @@ def _create_asset(v):
                       kernel_version=v['kernelrelease'], os=v['os'], os_version=v['osrelease'],
                       os_arch=v['osarch'], comment='created from salt.')
 
-    for ip in v['ipv4'].remove('127.0.0.1'):
+    asset_obj.save()
+    for ip in v['ipv4']:
+        if ip == '127.0.0.1':
+            continue
         asset_obj.ip.add(IpAddress.objects.get(ip_address=ip))
 
     asset_obj.save()
@@ -78,6 +85,7 @@ def update_asset_info(asset=None):
     else:
         ret = salt_api.local('*', 'grains.items')['return'][0]
 
+    print(ret)
     for k, v in ret.items():
         if Asset.objects.filter(sn=v['serialnumber']).exists():
             obj = Asset.objects.get(sn=v['serialnumber'])

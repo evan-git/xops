@@ -38,11 +38,6 @@ class AddAssetView(CreateView):
     success_url = reverse_lazy('cmdb:asset')
     template_name = 'cmdb/add_asset.html'
 
-    def form_valid(self, form):
-        form.cleaned_data['ip'].is_used = True
-        form.cleaned_data['ip'].save()
-        return super(AddAssetView, self).form_valid(form)
-
 
 class AssetDetailView(DetailView):
     model = models.Asset
