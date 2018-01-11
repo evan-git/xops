@@ -24,10 +24,15 @@
                 <table id="asset-table" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th class="text-center">资产序列号</th>
-                      <th class="text-center">资产类型</th>
+                      <th class="text-center">主机名</th>
                       <th class="text-center">IP 地址</th>
+                      <th class="text-center">资产类型</th>
                       <th class="text-center">操作系统</th>
+                      <th class="text-center">系统版本</th>
+                      <th class="text-center">内存</th>
+                      <th class="text-center">CPU</th>
+                      <th class="text-center">磁盘</th>
+                      <th class="text-center">资产序列号</th>
                       <th class="text-center">更新时间</th>
                       <th class="text-center">操作</th>
                     </tr>
@@ -35,10 +40,15 @@
                     <tbody>
                     {% for asset in assets %}
                       <tr class="text-center">
-                        <td>{{ asset.sn }}</td>
+                        <td>{{ asset.hostname }}</td>
+                        <td>{{ asset.ip.all }}</td>
                         <td>{{ asset.get_asset_type_display }}</td>
-                        <td>{{ asset.ip }}</td>
                         <td>{{ asset.os }}</td>
+                        <td>{{ asset.os_version }}</td>
+                        <td>{{ asset.memory }}</td>
+                        <td>{{ asset.cpu_cores }}</td>
+                        <td>{{ asset.disk_total }}</td>
+                        <td>{{ asset.sn }}</td>
                         <td>{{ asset.update_date }}</td>
                         <td>
                             <a href="{% url 'cmdb:asset-detail' asset.id %}" class="btn btn-xs btn-info">详情</a>
@@ -49,11 +59,16 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                      <th>资产序列号</th>
-                      <th>资产类型</th>
-                      <th>IP 地址</th>
-                      <th>操作系统</th>
-                      <th>更新时间</th>
+                      <th class="text-center">主机名</th>
+                      <th class="text-center">IP 地址</th>
+                      <th class="text-center">资产类型</th>
+                      <th class="text-center">操作系统</th>
+                      <th class="text-center">系统版本</th>
+                      <th class="text-center">内存</th>
+                      <th class="text-center">CPU</th>
+                      <th class="text-center">磁盘</th>
+                      <th class="text-center">资产序列号</th>
+                      <th class="text-center">更新时间</th>
                       <th class="text-center">操作</th>
                     </tr>
                     </tfoot>

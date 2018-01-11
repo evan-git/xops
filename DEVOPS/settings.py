@@ -150,3 +150,6 @@ SALT_API = {
     'username': 'salt-api',
     'password': '123456'
 }
+
+CELERY_RESULT_BACKEND = 'redis://192.168.243.103:6379'
+CELERY_BROKER_URL = 'redis://192.168.243.103:6379'

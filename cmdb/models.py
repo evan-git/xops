@@ -81,20 +81,38 @@ class AssetGroup(models.Model):
 
 
 class Asset(models.Model):
-    sn = models.CharField('资产序列号', max_length=100)
+    hostname = models.CharField('主机名', max_length=128, blank=True, null=True)
     asset_type_choices = ((0, '物理机'), (1, '虚拟机'), (2, '交换机'), (3, '路由器'), (4, '其它设备'))
     asset_type = models.PositiveSmallIntegerField('资产类型', choices=asset_type_choices, default=1)
-    ip = models.ForeignKey(IpAddress, verbose_name='IP 地址')
-    os = models.CharField('操作系统', max_length=50)
+    ip = models.ManyToManyField(IpAddress, verbose_name='IP 地址')
+    remote_card_ip = models.CharField('远程管理卡地址', max_length=16, null=True, blank=True)
     group = models.ManyToManyField(AssetGroup, verbose_name='资产分组')
-    create_date = models.DateTimeField(auto_now=True)
-    update_date = models.DateTimeField(blank=True, null=True)
+
+    vendor = models.CharField('制造商', max_length=64, null=True, blank=True)
+    sn = models.CharField('Serial number', max_length=128, null=True, blank=True)
+
+    cpu_model = models.CharField('CPU model', max_length=64, null=True, blank=True)
+    cpu_cores = models.IntegerField('CPU cores', null=True)
+    memory = models.CharField('内存(GB)', max_length=64, null=True, blank=True)
+    disk_total = models.CharField('磁盘容量', max_length=1024, null=True, blank=True)
+    disk_info = models.CharField('磁盘信息', max_length=1024, null=True, blank=True)
+
+    kernel = models.CharField('内核', max_length=128, null=True, blank=True)
+    kernel_version = models.CharField('内核版本', max_length=128, null=True, blank=True)
+    os = models.CharField('OS', max_length=128, null=True, blank=True)
+    os_version = models.CharField('OS version', max_length=16, null=True, blank=True)
+    os_arch = models.CharField('OS arch', max_length=16, blank=True, null=True)
+
+    create_date = models.DateTimeField('添加时间', auto_now=True)
+    update_date = models.DateTimeField('更新时间', blank=True, null=True)
+
+    comment = models.TextField('备注', max_length=128, default='', blank=True)
 
     class Meta:
         verbose_name = '资产'
         verbose_name_plural = verbose_name
 
     def __unicode__(self):
-        return self.sn
+        return self.hostname
 
     __str__ = __unicode__
