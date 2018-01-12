@@ -15,7 +15,12 @@ class AssetForm(ModelForm):
             'asset_type': Select(
                 attrs={'class': 'select2'}),
             'group': SelectMultiple(
-                attrs={'class': 'select2'}),
-            'ip': Select(
                 attrs={'class': 'select2'})
         }
+
+    def clean_ip(self):
+        ip = self.cleaned_data.get("ip")
+        if models.IpAddress.objects.get(ip_address=ip).asset_set.count() != 0 or \
+                not models.IpAddress.objects.filter(ip_address=ip).exists():
+            raise ValidationError('Ip already used or not exists.')
+        return models.IpAddress.objects.get(ip_address=ip)
